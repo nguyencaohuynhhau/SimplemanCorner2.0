@@ -1,7 +1,7 @@
-﻿@model simplemancorner.Web.Infrastructure.Core.PaginationSet<simplemancorner.Web.Models.ProductViewModel>
+﻿@model SimplemanCorner.Web.Infrastructure.Core.PaginationSet<SimplemanCorner.Web.Models.ProductViewModel>
 
 @{
-    var category = (simplemancorner.Web.Models.ProductCategoryViewModel)ViewBag.Category;
+    var category = (SimplemanCorner.Web.Models.ProductCategoryViewModel)ViewBag.Category;
     var pageIndex = Model.Page;
     ViewBag.Title = pageIndex == 1 ? category.Name : category.Name + " - Trang " + pageIndex;
     ViewBag.MetaKeyword = pageIndex == 1 ? category.MetaKeyword : category.MetaKeyword + " - Trang " + pageIndex;

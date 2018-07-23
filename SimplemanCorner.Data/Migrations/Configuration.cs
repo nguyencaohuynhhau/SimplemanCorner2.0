@@ -28,7 +28,8 @@
             CreateContactDetail(context);
 
             CreateConfigTitle(context);
-
+            CreateFooter(context);
+            CreateUser(context);
 
         }
         private void CreateConfigTitle(SimplemanCornerDbContext context)
@@ -63,31 +64,34 @@
         }
         private void CreateUser(SimplemanCornerDbContext context)
         {
-            //var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new SimplemanCornerDbContext()));
+            var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new SimplemanCornerDbContext()));
 
-            //var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new SimplemanCornerDbContext()));
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new SimplemanCornerDbContext()));
 
-            //var user = new ApplicationUser()
-            //{
-            //    UserName = "tedu",
-            //    Email = "tedu.international@gmail.com",
-            //    EmailConfirmed = true,
-            //    BirthDay = DateTime.Now,
-            //    FullName = "Technology Education"
+            var user = new ApplicationUser()
+            {
+                UserName = "tedu",
+                Email = "tedu.international@gmail.com",
+                EmailConfirmed = true,
+                BirthDay = DateTime.Now,
+                FullName = "Technology Education"
 
-            //};
+            };
+            if (manager.Users.Count(x => x.UserName == "tedu") == 0)
+            {
+                manager.Create(user, "123654$");
 
-            //manager.Create(user, "123654$");
+                if (!roleManager.Roles.Any())
+                {
+                    roleManager.Create(new IdentityRole { Name = "Admin" });
+                    roleManager.Create(new IdentityRole { Name = "User" });
+                }
 
-            //if (!roleManager.Roles.Any())
-            //{
-            //    roleManager.Create(new IdentityRole { Name = "Admin" });
-            //    roleManager.Create(new IdentityRole { Name = "User" });
-            //}
+                var adminUser = manager.FindByEmail("tedu.international@gmail.com");
 
-            //var adminUser = manager.FindByEmail("tedu.international@gmail.com");
+                manager.AddToRoles(adminUser.Id, new string[] { "Admin", "User" });
+            }
 
-            //manager.AddToRoles(adminUser.Id, new string[] { "Admin", "User" });
         }
         private void CreateProductCategorySample(SimplemanCorner.Data.SimplemanCornerDbContext context)
         {
@@ -109,7 +113,13 @@
         {
             if (context.Footers.Count(x => x.ID == CommonConstants.DefaultFooterId) == 0)
             {
-                string content = "";
+                string content = "Footer";
+                context.Footers.Add(new Footer()
+                {
+                    ID = CommonConstants.DefaultFooterId,
+                    Content = content
+                });
+                context.SaveChanges();
             }
         }
 
@@ -192,7 +202,7 @@
                         Address = "Ngõ 77 Xuân La",
                         Email = "tedu@gmail.com",
                         Lat = 21.0633645,
-                        Lng= 105.8053274,
+                        Lng = 105.8053274,
                         Phone = "095423233",
                         Website = "http://tedu.com.vn",
                         Other = "",

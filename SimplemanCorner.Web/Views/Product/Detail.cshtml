@@ -1,4 +1,4 @@
-﻿@model simplemancorner.Web.Models.ProductViewModel
+﻿@model SimplemanCorner.Web.Models.ProductViewModel
 
 @{
     ViewBag.Title = Model.Name;
@@ -92,7 +92,7 @@
       <div class="tag">
         <h5>Tag :</h5>
         <ul class="taglist">
-          @foreach (var tag in (IEnumerable<simplemancorner.Web.Models.TagViewModel>)ViewBag.Tags)
+          @foreach (var tag in (IEnumerable<SimplemanCorner.Web.Models.TagViewModel>)ViewBag.Tags)
           {
               <li><a href="/tag/@(tag.ID).html">@(tag.Name), </a></li>
           }
@@ -117,7 +117,7 @@
     <div class="clearfix"> </div>
   </div>
   @{
-      var relatedProducts = (IEnumerable<simplemancorner.Web.Models.ProductViewModel>)ViewBag.RelatedProducts;
+      var relatedProducts = (IEnumerable<SimplemanCorner.Web.Models.ProductViewModel>)ViewBag.RelatedProducts;
   }
   <ul id="flexiselDemo1">
     @foreach (var product in relatedProducts)

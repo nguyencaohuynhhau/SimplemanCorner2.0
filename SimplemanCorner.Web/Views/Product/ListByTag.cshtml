@@ -1,8 +1,8 @@
-﻿@model simplemancorner.Web.Infrastructure.Core.PaginationSet<simplemancorner.Web.Models.ProductViewModel>
+﻿@model SimplemanCorner.Web.Infrastructure.Core.PaginationSet<SimplemanCorner.Web.Models.ProductViewModel>
 
 @{
 
-    var tag = (simplemancorner.Web.Models.TagViewModel)ViewBag.Tag;
+    var tag = (SimplemanCorner.Web.Models.TagViewModel)ViewBag.Tag;
     var pageIndex = Model.Page;
     ViewBag.Title = pageIndex == 1 ? "Kết quả tìm kiếm cho tag " + tag.Name : "Kết quả tìm kiếm cho tag " + tag.Name + " - Trang " + pageIndex;
     ViewBag.MetaKeyword = pageIndex == 1 ? "Kết quả tìm kiếm cho tag " + tag.Name : "Kết quả tìm kiếm cho tag " + tag.Name + " - Trang " + pageIndex;
